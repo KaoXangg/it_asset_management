@@ -1,0 +1,32 @@
+version: '3.8'
+
+# Lưu ý: Docker Compose này chỉ chạy backend + frontend. SQL Server chạy trên máy host
+# (Windows/SSMS) như hiện tại của bạn, KHÔNG chạy trong container — vì DB_HOST hiện đang
+# trỏ tới tên máy Windows. Nếu muốn tự chạy SQL Server trong container, có thể thêm service
+# `mcr.microsoft.com/mssql/server` và đổi DB_HOST=sqlserver bên dưới.
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - '5001:5000'
+    env_file:
+      - ./backend/.env
+    environment:
+      - PORT=5000
+    volumes:
+      - backend_uploads:/app/uploads
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - '3000:3000'
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:5001/api
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  backend_uploads:

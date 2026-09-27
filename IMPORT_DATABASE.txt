@@ -1,0 +1,35 @@
+HƯỚNG DẪN IMPORT DATABASE (SQL SERVER)
+=======================================
+
+Project này đã được chuyển sang dùng SQL Server (trước đây là MySQL).
+
+BƯỚC 1: Bật SQL Server Authentication (Mixed Mode) trong SSMS
+----------------------------------------------------------------
+1. Mở SSMS, chuột phải vào tên server (gốc cây) > Properties
+2. Vào mục "Security" > chọn "SQL Server and Windows Authentication mode"
+3. Bấm OK > Restart lại SQL Server service (chuột phải server > Restart)
+4. Mở lại "Security" > "Logins" > chuột phải "sa" > Properties
+   - Tab General: đặt password (ví dụ: YourStrong@Passw0rd)
+   - Tab Status: Login = Enabled
+5. Bấm OK
+
+BƯỚC 2: Chạy script tạo database + import dữ liệu mẫu
+----------------------------------------------------------------
+1. Trong SSMS: File > Open > File... > chọn backend/database/mssql_schema.sql
+2. Nhấn Execute (F5)
+   Script sẽ tự tạo database "it_asset_management" và toàn bộ bảng + dữ liệu mẫu.
+
+File mssql_schema.sql đã bao gồm:
+- Tất cả bảng (schema)
+- Dữ liệu mẫu (8 tài sản, 5 phân bổ, 6 bảo trì)
+- 3 tài khoản: admin/admin123, itstaff/staff123, user/user123
+
+BƯỚC 3: Cập nhật backend/.env
+----------------------------------------------------------------
+Sửa DB_USER / DB_PASSWORD theo đúng thông tin đăng nhập "sa" bạn vừa đặt ở Bước 1.
+Nếu SQL Server của bạn là named instance (vd: SQLEXPRESS), sửa:
+   DB_HOST=localhost\SQLEXPRESS
+   (xóa dòng DB_PORT — sẽ tự resolve qua SQL Server Browser)
+
+(File full_database.sql cũ - phiên bản MySQL - vẫn được giữ lại trong thư mục
+backend/database/ để tham khảo, không dùng cho SQL Server.)

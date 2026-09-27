@@ -1,0 +1,13 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/": "pages/index.js",
+  "/login": "pages/login.js",
+  "/assets/[id]": "pages/assets/[id].js",
+  "/assets": "pages/assets.js",
+  "/assets/scan": "pages/assets/scan.js",
+  "/users": "pages/users.js",
+  "/maintenance": "pages/maintenance.js",
+  "/reports": "pages/reports.js"
+}
