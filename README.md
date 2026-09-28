@@ -76,7 +76,7 @@ Ba vai trò: `admin`, `it_staff`, `regular_user`.
 ┌──────────────────┐   REST/JSON + Bearer JWT   ┌─────────────────────┐   T-SQL   ┌────────────┐
 │ Next.js / React  │ ─────────────────────────► │ Express API         │ ────────► │ SQL Server │
 │ (port 3000)      │ ◄───────────────────────── │ (port 5000)         │ ◄──────── │            │
-└──────────────────┘   refresh cookie (httpOnly)└─────────────────────┘          └────────────┘
+└──────────────────┘   refresh cookie (httpOnly)└─────────────────────┘           └────────────┘
                                                      │        │
                                                      │        └─► SMTP (email nhắc nhở, cron 08:00)
                                                      └─► Groq API (chatbot)
